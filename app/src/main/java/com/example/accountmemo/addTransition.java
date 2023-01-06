@@ -31,11 +31,11 @@ public class addTransition extends AppCompatActivity {
     private static final String CASH = "Cash";
     private static final String BANK_ACCOUNT = "Bank Account";
     private static final String CREDIT_CARD = "Credit Card";
-    private final String Cost_cant_be_Empty = getResources().getString(R.string.Cost_cant_be_Empty);
-    private final String Type_cant_be_Empty = getResources().getString(R.string.Type_cant_be_Empty);
-    private final String Choose_one_kind_of_Asset = getResources().getString(R.string.Choose_one_kind_of_Asset);
-    private final String Choose_a_Date = getResources().getString(R.string.Choose_a_Date);
-    private final String Choose_Income_or_Expenses = getResources().getString(R.string.Choose_Income_or_Expenses);
+    private String Cost_cant_be_Empty ;
+    private String Type_cant_be_Empty ;
+    private String Choose_one_kind_of_Asset ;
+    private String Choose_a_Date ;
+    private String Choose_Income_or_Expenses ;
     private Button btn_income,btn_expenses,btn_cash,btn_account,btn_creditCard,btn_save;
     private TextView txv_time;
     private EditText edt_type,edt_cost,edt_note;
@@ -65,6 +65,12 @@ public class addTransition extends AppCompatActivity {
         edt_type = findViewById(R.id.edt_addType);
         edt_cost = findViewById(R.id.edt_addCost);
         edt_note = findViewById(R.id.edt_addNote);
+
+        Cost_cant_be_Empty = getResources().getString(R.string.Cost_cant_be_Empty);
+        Type_cant_be_Empty = getResources().getString(R.string.Type_cant_be_Empty);
+        Choose_one_kind_of_Asset = getResources().getString(R.string.Choose_one_kind_of_Asset);
+        Choose_a_Date = getResources().getString(R.string.Choose_a_Date);
+        Choose_Income_or_Expenses = getResources().getString(R.string.Choose_Income_or_Expenses);
 
         btn_income.setOnClickListener(new View.OnClickListener() {
             @Override
