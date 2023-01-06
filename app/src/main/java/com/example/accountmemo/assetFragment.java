@@ -20,6 +20,11 @@ import java.util.List;
 public class assetFragment extends Fragment
 {
     private static final String TAG = "assetFragment";
+    private static final String INCOME = "Income";
+    private static final String EXPENSES = "Expenses";
+    private static final String CASH = "Cash";
+    private static final String BANK_ACCOUNT = "Bank Account";
+    private static final String CREDIT_CARD = "Credit Card";
     private RoomDB roomDB;
     private List<MainData> mainDataList = new ArrayList<>();
     private List<MainData> IncomeList = new ArrayList<>();
@@ -61,8 +66,8 @@ public class assetFragment extends Fragment
     }
     private void GETALT()
     {
-        IncomeList = roomDB.mainDao().getIncome("Income");
-        ExpensesList = roomDB.mainDao().getExpense("Expenses");
+        IncomeList = roomDB.mainDao().getIncome(INCOME);
+        ExpensesList = roomDB.mainDao().getExpense(EXPENSES);
 
         long I = 0 , E = 0 ;
 
@@ -83,8 +88,8 @@ public class assetFragment extends Fragment
     {
         long CI = 0 , CE = 0 , CT = 0 ;
 
-        CashI = roomDB.mainDao().getIncomeByType("Income","Cash");
-        CashE = roomDB.mainDao().getExpenseByType("Expenses","Cash");
+        CashI = roomDB.mainDao().getIncomeByType(INCOME,CASH);
+        CashE = roomDB.mainDao().getExpenseByType(EXPENSES,CASH);
 
         for(int i = 0 ; i<CashI.size() ; i++)
         {
@@ -104,8 +109,8 @@ public class assetFragment extends Fragment
     {
         long BI = 0 , BE = 0 , BT = 0 ;
 
-        BankI = roomDB.mainDao().getIncomeByType("Income","Bank Account");
-        BankE = roomDB.mainDao().getExpenseByType("Expenses","Bank Account");
+        BankI = roomDB.mainDao().getIncomeByType(INCOME,BANK_ACCOUNT);
+        BankE = roomDB.mainDao().getExpenseByType(EXPENSES,BANK_ACCOUNT);
 
         for(int i = 0 ; i<BankI.size() ; i++)
         {
@@ -125,8 +130,8 @@ public class assetFragment extends Fragment
     {
         long DI = 0 , DE = 0 , DT = 0 ;
 
-        CardI = roomDB.mainDao().getIncomeByType("Income","Credit Card");
-        CardE = roomDB.mainDao().getExpenseByType("Expenses","Credit Card");
+        CardI = roomDB.mainDao().getIncomeByType(INCOME,CREDIT_CARD);
+        CardE = roomDB.mainDao().getExpenseByType(EXPENSES,CREDIT_CARD);
 
         for(int i = 0 ; i<CardI.size() ; i++)
         {

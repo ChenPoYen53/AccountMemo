@@ -24,7 +24,7 @@ import java.util.List;
 
 public class tf_RecyclerViewAdapter extends RecyclerView.Adapter<tf_RecyclerViewAdapter.ViewHolder>
 {
-    private Activity context;
+    private final Activity context;
     private List<MainData> mainDataList = new ArrayList<>();
     private RoomDB roomDB;
     private MainData mainData = new MainData();
@@ -44,6 +44,11 @@ public class tf_RecyclerViewAdapter extends RecyclerView.Adapter<tf_RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        final String DELETE = context.getResources().getString(R.string.DELETE);
+        final String Delete = context.getResources().getString(R.string.Delete);
+        final String Are_you_sure_to_Delete = context.getString(R.string.Are_you_sure_to_Delete);
+        final String Cancel = context.getString(R.string.Cancel);
         mainData = mainDataList.get(position);
         roomDB = RoomDB.getInstance(context);
         holder.No.setText(String.valueOf(position+1));
@@ -62,8 +67,8 @@ public class tf_RecyclerViewAdapter extends RecyclerView.Adapter<tf_RecyclerView
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-                dialog.setTitle("DELETE").setMessage("Are you sure to Delete ?")
-                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                dialog.setTitle(DELETE).setMessage(Are_you_sure_to_Delete)
+                        .setPositiveButton(Delete, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 mainData = mainDataList.get(holder.getAdapterPosition());
@@ -77,7 +82,7 @@ public class tf_RecyclerViewAdapter extends RecyclerView.Adapter<tf_RecyclerView
                                 notifyDataSetChanged();
                             }
                         })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(Cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
@@ -91,7 +96,7 @@ public class tf_RecyclerViewAdapter extends RecyclerView.Adapter<tf_RecyclerView
         return mainDataList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder
+    static class ViewHolder extends RecyclerView.ViewHolder
     {
         TextView No,time,type,cost,note,asset;
         ImageView delete;

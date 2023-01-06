@@ -1,14 +1,9 @@
 package com.example.accountmemo;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.facebook.stetho.Stetho;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
@@ -18,8 +13,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().hide();
-
-        setTitle("");
 
         bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -36,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new transitionFragment()).commit();
 
         Stetho.initializeWithDefaults(this);

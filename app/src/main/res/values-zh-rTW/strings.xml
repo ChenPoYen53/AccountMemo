@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AccountMemo</string>
+    <string name="transaction">帳單</string>
+    <string name="statistics">統計</string>
+    <string name="asset">資產</string>
+    <string name="month">月</string>
+    <string name="assets">資產</string>
+    <string name="income">收入</string>
+    <string name="expenses">支出</string>
+    <string name="total">總額</string>
+    <string name="date">日</string>
+    <string name="click_to_select_a_date">點擊以選擇時間</string>
+    <string name="cash">現金</string>
+    <string name="bankaccount">帳戶</string>
+    <string name="type">類別</string>
+    <string name="cost">金額</string>
+    <string name="note">內容</string>
+    <string name="save">存款</string>
+    <string name="credit_card">信用卡</string>
+    <string name="monthly">本月</string>
+    <string name="daily">本日</string>
+    <string name="liabilities">負債</string>
+    <string name="bank_account">帳戶</string>
+    <string name="Cost_cant_be_Empty">金額不能為空</string>
+    <string name="Type_cant_be_Empty">種類不能為空</string>
+    <string name="Choose_one_kind_of_Asset">請選擇一種金流類型</string>
+    <string name="Choose_a_Date">請選擇日期</string>
+    <string name="Choose_Income_or_Expenses">請選擇支出或收入</string>
+    <string name="Delete">刪除</string>
+    <string name="DELETE">刪除</string>
+    <string name="Are_you_sure_to_Delete">確定刪除</string>
+    <string name="Cancel">取消</string>
+</resources>

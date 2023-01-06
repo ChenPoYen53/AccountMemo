@@ -21,4 +21,13 @@
     <string name="daily">Daily</string>
     <string name="liabilities">Liabilities</string>
     <string name="bank_account">Bank Account</string>
+    <string name="Cost_cant_be_Empty">"Cost can't be Empty"</string>
+    <string name="Type_cant_be_Empty">Type can\'t be Empty</string>
+    <string name="Choose_one_kind_of_Asset">Choose one kind of Asset</string>
+    <string name="Choose_a_Date">Choose a Date</string>
+    <string name="Choose_Income_or_Expenses">Choose Income or Expenses</string>
+    <string name="Delete">Delete</string>
+    <string name="DELETE">DELETE</string>
+    <string name="Are_you_sure_to_Delete">Are you sure to Delete ?</string>
+    <string name="Cancel">Cancel</string>
 </resources>

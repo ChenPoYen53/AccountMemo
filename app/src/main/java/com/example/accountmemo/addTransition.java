@@ -26,7 +26,16 @@ import java.util.Locale;
 
 public class addTransition extends AppCompatActivity {
     private static final String TAG = "addTransition";
-    private static final String DATA = "Data...";
+    private static final String INCOME = "Income";
+    private static final String EXPENSES = "Expenses";
+    private static final String CASH = "Cash";
+    private static final String BANK_ACCOUNT = "Bank Account";
+    private static final String CREDIT_CARD = "Credit Card";
+    private final String Cost_cant_be_Empty = getResources().getString(R.string.Cost_cant_be_Empty);
+    private final String Type_cant_be_Empty = getResources().getString(R.string.Type_cant_be_Empty);
+    private final String Choose_one_kind_of_Asset = getResources().getString(R.string.Choose_one_kind_of_Asset);
+    private final String Choose_a_Date = getResources().getString(R.string.Choose_a_Date);
+    private final String Choose_Income_or_Expenses = getResources().getString(R.string.Choose_Income_or_Expenses);
     private Button btn_income,btn_expenses,btn_cash,btn_account,btn_creditCard,btn_save;
     private TextView txv_time;
     private EditText edt_type,edt_cost,edt_note;
@@ -229,33 +238,27 @@ public class addTransition extends AppCompatActivity {
                             startActivity(intent);
                             roomdb = RoomDB.getInstance(this);
                             mainDataList = roomdb.mainDao().getAll();
-                            String inout;
                             if(flag1 == 1 && flag2 == 0)
                             {
-                                inout = "Income";
-                                mainData.setInout(inout);
+                                mainData.setInout(INCOME);
                             }
                             else if(flag1 == 0 && flag2 == 1)
                             {
-                                inout = "Expenses";
-                                mainData.setInout(inout);
+                                mainData.setInout(EXPENSES);
                             }
 
                             String asset;
                             if(flag3 == 1 && flag4 == 0 && flag5 == 0)
                             {
-                                asset = "Cash";
-                                mainData.setAsset(asset);
+                                mainData.setAsset(CASH);
                             }
                             else if(flag3 == 0 && flag4 == 1 && flag5 == 0)
                             {
-                                asset = "Bank Account";
-                                mainData.setAsset(asset);
+                                mainData.setAsset(BANK_ACCOUNT);
                             }
                             else if(flag3 == 0 && flag4 == 0 && flag5 == 1)
                             {
-                                asset = "Credit Card";
-                                mainData.setAsset(asset);
+                                mainData.setAsset(CREDIT_CARD);
                             }
                             String type,note;
                             type = edt_type.getText().toString();
@@ -268,19 +271,6 @@ public class addTransition extends AppCompatActivity {
 
                             String day = txv_time.getText().toString();
                             mainData.setDay(day);
-
-
-
-        /*mainDataList = roomdb.mainDao().getAll();
-        mainData = mainDataList.get(0);
-        String INOUT = mainData.getInout();
-        String ASSET = mainData.getAsset();
-        String TYPE = mainData.getType();
-        long COST = mainData.getCost();
-        String NOTE = mainData.getNote();
-        String DAY = mainData.getDay();
-        Log.d(TAG,DATA+INOUT+".."+ASSET+".."+TYPE+".."+COST+".."+NOTE+".."+DAY);*/
-
 
                             SharedPreferences sharedPreferences1 = getSharedPreferences("DATE_cal",MODE_PRIVATE);
                             int y2 = sharedPreferences1.getInt("year",0);
@@ -300,18 +290,18 @@ public class addTransition extends AppCompatActivity {
                             finish();
                         }
                         else
-                            Toast.makeText(this, "Cost can't be Empty", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, Cost_cant_be_Empty, Toast.LENGTH_SHORT).show();
                     }
                     else
-                        Toast.makeText(this, "Type can't be Empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, Type_cant_be_Empty, Toast.LENGTH_SHORT).show();
                 }
                 else
-                    Toast.makeText(this, "Choose one kind of Asset", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, Choose_one_kind_of_Asset, Toast.LENGTH_SHORT).show();
             }
             else
-                Toast.makeText(this, "Choose a Date", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, Choose_a_Date, Toast.LENGTH_SHORT).show();
         }
         else
-            Toast.makeText(this, "Choose Income or Expenses", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, Choose_Income_or_Expenses, Toast.LENGTH_SHORT).show();
     }
 }
