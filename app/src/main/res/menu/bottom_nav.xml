@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/transition"
+        android:icon="@drawable/ic_bill"
+        android:title="@string/transaction"/>
+    <item
+        android:id="@+id/statistics"
+        android:icon="@drawable/ic_statistics"
+        android:title="@string/statistics"/>
+    <item
+        android:id="@+id/asset"
+        android:icon="@drawable/ic_asset"
+        android:title="@string/asset"/>
+
+</menu>

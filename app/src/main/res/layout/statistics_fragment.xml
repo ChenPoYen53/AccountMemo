@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/top_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/top_inorout"
+        app:itemIconTint="@color/selector_color"
+        app:itemTextColor="@color/selector_color"
+        android:background="?android:attr/windowBackground"/>
+    <FrameLayout
+        android:backgroundTint="@color/white"
+        android:id="@+id/fragment_container_statistics"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

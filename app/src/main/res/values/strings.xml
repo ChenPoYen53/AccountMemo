@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">AccountMemo</string>
+    <string name="transaction">Transaction</string>
+    <string name="statistics">Statistics</string>
+    <string name="asset">Asset</string>
+    <string name="month">Month</string>
+    <string name="assets">Assets</string>
+    <string name="income">Income</string>
+    <string name="expenses">Expenses</string>
+    <string name="total">Total</string>
+    <string name="date">Date</string>
+    <string name="click_to_select_a_date">Click to Select a Date</string>
+    <string name="cash">Cash</string>
+    <string name="bankaccount">Bank Account</string>
+    <string name="type">Type</string>
+    <string name="cost">Cost</string>
+    <string name="note">Note</string>
+    <string name="save">save</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="monthly">Monthly</string>
+    <string name="daily">Daily</string>
+    <string name="liabilities">Liabilities</string>
+    <string name="bank_account">Bank Account</string>
+</resources>
