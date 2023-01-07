@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.LocaleList;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -29,6 +32,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.LongStream;
 
 public class transitionFragment extends Fragment
@@ -36,7 +40,7 @@ public class transitionFragment extends Fragment
     private static final String TAG = "transitionFragment";
     private static final String INCOME = "Income";
     private static final String EXPENSES = "Expenses";
-    private FloatingActionButton btn_add;
+    private FloatingActionButton btn_add , btn_setting;
     private Intent intent;
     private RoomDB roomDB;
     private MainData mainData;
@@ -45,7 +49,7 @@ public class transitionFragment extends Fragment
     private LinearLayoutManager linearLayoutManager;
     private List<MainData> mainDataList;
     private TextView incomeM,expenseM,totalM,incomeD,expenseD,totalD;
-    private Calendar calendar = Calendar.getInstance();
+    private final Calendar calendar = Calendar.getInstance();
     private List<MainData> listI = new ArrayList();
     private List<MainData> listE = new ArrayList();
     private List<MainData> listDI = new ArrayList();
@@ -85,6 +89,13 @@ public class transitionFragment extends Fragment
             public void onClick(View view) {
                 intent = new Intent(getActivity(),addTransition.class);
                 startActivity(intent);
+            }
+        });
+        btn_setting = view.findViewById(R.id.setting);
+        btn_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //ChangeLan(view.getContext());
             }
         });
         monthInOut();
@@ -156,4 +167,19 @@ public class transitionFragment extends Fragment
         totalD.setText(String.valueOf(IncomeTotal-ExpensesTotal));
         adapter.notifyDataSetChanged();
     }
+    /*private void ChangeLan(Context context)
+    {
+        Resources resources = context.getResources();
+        Configuration configuration = new Configuration(resources.getConfiguration());
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            LocaleList localeList = new LocaleList(Locale.TRADITIONAL_CHINESE);
+            LocaleList.setDefault(localeList);
+            configuration.setLocales(localeList);
+        }else {
+            configuration.setLocale(Locale.TRADITIONAL_CHINESE);
+        }
+        context = context.createConfigurationContext(configuration);
+        Locale.setDefault(Locale.getDefault());
+    }*/
 }

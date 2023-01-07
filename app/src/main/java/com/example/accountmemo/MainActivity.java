@@ -1,9 +1,19 @@
 package com.example.accountmemo;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.LocaleList;
+import android.util.DisplayMetrics;
+
 import com.facebook.stetho.Stetho;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
@@ -34,5 +44,4 @@ public class MainActivity extends AppCompatActivity {
 
         Stetho.initializeWithDefaults(this);
     }
-
 }
