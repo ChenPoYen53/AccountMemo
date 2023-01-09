@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
+
+        //Fragment
         bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){

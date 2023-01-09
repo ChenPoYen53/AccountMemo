@@ -55,6 +55,8 @@ public class addTransition extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transition);
 
+        getSupportActionBar().hide();
+
         btn_income = findViewById(R.id.btn_addIncome);
         btn_expenses = findViewById(R.id.btn_addExpenses);
         btn_cash = findViewById(R.id.btn_addCash);

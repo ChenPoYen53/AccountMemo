@@ -31,4 +31,6 @@
     <string name="DELETE">刪除</string>
     <string name="Are_you_sure_to_Delete">確定刪除</string>
     <string name="Cancel">取消</string>
+    <string name="sure">確定</string>
+    <string name="year_and_month">年，月</string>
 </resources>

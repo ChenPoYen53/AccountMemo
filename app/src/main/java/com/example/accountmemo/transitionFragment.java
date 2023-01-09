@@ -1,6 +1,8 @@
 package com.example.accountmemo;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +16,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +32,7 @@ import com.example.accountmemo.Database.MainData;
 import com.example.accountmemo.Database.RoomDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -40,20 +46,24 @@ public class transitionFragment extends Fragment
     private static final String TAG = "transitionFragment";
     private static final String INCOME = "Income";
     private static final String EXPENSES = "Expenses";
+    private static final String DATEPICKER = "datePicker";
+    private Dialog dialog ;
+    private MonthPicker monthPicker;
     private FloatingActionButton btn_add , btn_setting;
+    private Button btn_left,btn_right;
+    private TextView txv;
     private Intent intent;
     private RoomDB roomDB;
-    private MainData mainData;
     private RecyclerView recyclerView;
     private tf_RecyclerViewAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
     private List<MainData> mainDataList;
     private TextView incomeM,expenseM,totalM,incomeD,expenseD,totalD;
     private final Calendar calendar = Calendar.getInstance();
-    private List<MainData> listI = new ArrayList();
-    private List<MainData> listE = new ArrayList();
-    private List<MainData> listDI = new ArrayList();
-    private List<MainData> listDE = new ArrayList();
+    private List<MainData> listI = new ArrayList<>();
+    private List<MainData> listE = new ArrayList<>();
+    private List<MainData> listDI = new ArrayList<>();
+    private List<MainData> listDE = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,13 +77,16 @@ public class transitionFragment extends Fragment
         roomDB = RoomDB.getInstance(view.getContext());
         mainDataList = roomDB.mainDao().getAll();
 
+        dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.datepickerdialog);
+        monthPicker = (MonthPicker) dialog.findViewById(R.id.month_picker);
+
         incomeM = view.findViewById(R.id.tf_income_m);
         expenseM = view.findViewById(R.id.tf_expenses_m);
         totalM = view.findViewById(R.id.tf_total_m);
         incomeD = view.findViewById(R.id.tf_income_d);
         expenseD = view.findViewById(R.id.tf_expenses_d);
         totalD = view.findViewById(R.id.tf_total_d);
-
 
         Activity activity = (Activity) view.getContext();
         recyclerView = view.findViewById(R.id.tf_recyclerView);
@@ -91,16 +104,64 @@ public class transitionFragment extends Fragment
                 startActivity(intent);
             }
         });
-        btn_setting = view.findViewById(R.id.setting);
+        /*btn_setting = view.findViewById(R.id.setting);
         btn_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //ChangeLan(view.getContext());
             }
-        });
+        });*/
+        int M = calendar.get(Calendar.MONTH);
+        int MM = M+1;
+        Log.d(TAG,"M,MM..."+M+","+MM);
+        /*txv = view.findViewById(R.id.tf_txv);
+        String time = String.valueOf(calendar.get(Calendar.YEAR))+"."+String.valueOf(MM);
+        txv.setText(time);
+        txv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePick(view);
+            }
+        });*/
+
         monthInOut();
         DailyInOut();
         return view;
+    }
+    //Date Picker (Year,Month)
+    private void datePick(View view)
+    {
+        btn_left = dialog.findViewById(R.id.btn_left);
+        btn_right = dialog.findViewById(R.id.btn_right);
+
+        dialog.setCancelable(true);
+
+        btn_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        btn_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = String.valueOf(monthPicker.getYear())+"."+String.valueOf(monthPicker.getMonth() + 1) ;
+                txv.setText(text);
+                dialog.dismiss();
+
+                SharedPreferences sharedPreferences = view.getContext().getSharedPreferences(DATEPICKER,Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("year",monthPicker.getYear());
+                editor.putInt("month",monthPicker.getMonth()+1);
+                editor.commit();
+
+                //adapter.notifyDataSetChanged();
+                //recyclerView.setAdapter(adapter);
+            }
+        });
+        dialog.show();
+
     }
 
     @Override
@@ -112,18 +173,20 @@ public class transitionFragment extends Fragment
         recyclerView.setAdapter(adapter);
     }
 
+    //Count Monthly Income/Expenses
     private void monthInOut()
     {
         int Y = calendar.get(Calendar.YEAR);
-        int M = calendar.get(Calendar.MONTH+1);
+        int M = calendar.get(Calendar.MONTH);
+        int MM = M+1;
 
         long IncomeTotal = 0;
         long ExpensesTotal = 0;
 
         mainDataList = roomDB.mainDao().getAll();
 
-        listI = roomDB.mainDao().getMonthIncome(INCOME,Y,M);
-        listE = roomDB.mainDao().getMonthExpense(EXPENSES,Y,M);
+        listI = roomDB.mainDao().getMonthIncome(INCOME,Y,MM);
+        listE = roomDB.mainDao().getMonthExpense(EXPENSES,Y,MM);
 
         for (int i = 0; i < listI.size(); i++)
         {
@@ -142,17 +205,20 @@ public class transitionFragment extends Fragment
         totalM.setText(String.valueOf(IncomeTotal-ExpensesTotal));
         adapter.notifyDataSetChanged();
     }
+
+    //Count Daily Income/Expenses
     private void DailyInOut()
     {
         int Y = calendar.get(Calendar.YEAR);
-        int M = calendar.get(Calendar.MONTH+1);
+        int M = calendar.get(Calendar.MONTH);
+        int MM = M+1;
         int D = calendar.get(Calendar.DAY_OF_MONTH);
 
         long IncomeTotal = 0;
         long ExpensesTotal = 0;
 
-        listDI = roomDB.mainDao().getDailyIncome(INCOME,Y,M,D);
-        listDE = roomDB.mainDao().getDailyExpense(EXPENSES,Y,M,D);
+        listDI = roomDB.mainDao().getDailyIncome(INCOME,Y,MM,D);
+        listDE = roomDB.mainDao().getDailyExpense(EXPENSES,Y,MM,D);
 
         for (int i=0;i<listDI.size();i++)
         {

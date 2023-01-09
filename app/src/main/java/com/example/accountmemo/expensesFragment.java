@@ -57,7 +57,11 @@ public class expensesFragment extends Fragment
 
         pieChart = view.findViewById(R.id.expenses_piechart);
         txv = view.findViewById(R.id.expenses_txv);
-        txv.setText(calendar.get(Calendar.YEAR)+"/"+calendar.get(Calendar.MONTH+1));
+        int M = calendar.get(Calendar.MONTH);
+        int MM = M+1;
+        int Y = calendar.get(Calendar.YEAR);
+        String txv_text = String.valueOf(Y)+"/"+String.valueOf(MM);
+        txv.setText(txv_text);
 
         show(view);
 
@@ -108,11 +112,15 @@ public class expensesFragment extends Fragment
 
         roomDB = RoomDB.getInstance(view.getContext());
 
-        mainDataList = roomDB.mainDao().getMonthExpense(EXPENSES,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH+1));
+        int M = calendar.get(Calendar.MONTH);
+        int MM = M+1;
+        int Y = calendar.get(Calendar.YEAR);
 
-        Log.d(TAG,"TODAY..."+calendar.get(Calendar.MONTH+1));
+        mainDataList = roomDB.mainDao().getMonthExpense(EXPENSES,Y,MM);
 
-        ArrayList<String> typeList = new ArrayList();
+        Log.d(TAG,"TODAY..."+MM);
+
+        ArrayList<String> typeList = new ArrayList<>();
         for(int i=0 ; i<mainDataList.size() ; i++)
         {
             typeList.add(mainDataList.get(i).getType());
@@ -143,7 +151,7 @@ public class expensesFragment extends Fragment
 
         for(String s : set)
         {
-            costList = roomDB.mainDao().getCostByType(s,calendar.get(Calendar.MONTH+1));
+            costList = roomDB.mainDao().getCostByType(s,MM);
             for(int i=0;i<costList.size();i++) {
                 PieEntry pieEntry = new PieEntry((float) costList.get(i).getCost(), s);
                 list.add(pieEntry);

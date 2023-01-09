@@ -3,8 +3,11 @@ package com.example.accountmemo;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +23,13 @@ import com.example.accountmemo.Database.MainData;
 import com.example.accountmemo.Database.RoomDB;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class tf_RecyclerViewAdapter extends RecyclerView.Adapter<tf_RecyclerViewAdapter.ViewHolder>
 {
+    private static final String TAG = "tf_RecyclerViewAdapter";
+    private static final String DATEPICKER = "datePicker";
     private final Activity context;
     private List<MainData> mainDataList = new ArrayList<>();
     private RoomDB roomDB;
@@ -49,6 +55,7 @@ public class tf_RecyclerViewAdapter extends RecyclerView.Adapter<tf_RecyclerView
         final String Delete = context.getResources().getString(R.string.Delete);
         final String Are_you_sure_to_Delete = context.getString(R.string.Are_you_sure_to_Delete);
         final String Cancel = context.getString(R.string.Cancel);
+
         mainData = mainDataList.get(position);
         roomDB = RoomDB.getInstance(context);
         holder.No.setText(String.valueOf(position+1));
@@ -57,6 +64,7 @@ public class tf_RecyclerViewAdapter extends RecyclerView.Adapter<tf_RecyclerView
         N = mainData.getMonth();
         D = mainData.getDate();
         String YND = String.valueOf(Y)+"/"+String.valueOf(N)+"/"+String.valueOf(D);
+        Log.d(TAG,"YND..."+YND);
         holder.time.setText(YND);
         holder.cost.setText(String.valueOf(mainData.getCost()));
         holder.note.setText(mainData.getNote());

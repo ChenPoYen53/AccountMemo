@@ -30,4 +30,6 @@
     <string name="DELETE">DELETE</string>
     <string name="Are_you_sure_to_Delete">Are you sure to Delete ?</string>
     <string name="Cancel">Cancel</string>
+    <string name="year_and_month">Year and Month</string>
+    <string name="sure">Sure</string>
 </resources>
